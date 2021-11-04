@@ -10,5 +10,6 @@ Cách thứ nhất: Sử dụng eclipse SE
 3. Chỉnh sửa user và pass SQL Server trong đường dẫn src\main\webapp\WEB-INF\configs\spring-config-hibernate.xml
 4. Chạy Server trên eclipse
 5. User/pass đăng nhập là NVA/123456
+
 Cách thứ hai: Setup Server Apache Tomcat 8.5
 Tham khảo thêm tại [https://openplanning.net/11583/cai-dat-tomcat-server]
