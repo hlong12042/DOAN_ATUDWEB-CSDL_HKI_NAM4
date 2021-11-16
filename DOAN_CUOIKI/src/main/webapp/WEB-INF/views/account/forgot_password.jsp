@@ -25,34 +25,34 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Forgot Password?</h1>
                                     </div>
-                                    <form class="user" action="login.html" method="post">
+                                    <form class="user" action="reset_password.html" method="post">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" name="tendn"
                                                 id="exampleInputEmail" aria-describedby="textHelp" required="required"
                                                 placeholder="Tên đăng nhập">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="matkhau"
-                                                id="exampleInputPassword" required="required"
-                                                placeholder="Mật khẩu">
+                                            <input type="email" class="form-control form-control-user" name="email"
+                                                id="exampleInputEmail" aria-describedby="emailHelp" required="required"
+                                                placeholder="Email">
                                         </div>
                                         <div class="form-group">
                                             <div id="captchaBackground">
                                                  <canvas id="captcha">captcha text</canvas>
-                                                 <a id="refreshButton" class="btn btn-user btn-block" href="login.html">Refresh</a>
+                                                 <button id="refreshButton" class="btn btn-user btn-block">Refresh</button>
                                                  <input id="textBox" type="text" name="captcha" required="required"
                                                  	class="form-control form-control-user">                                                 
                                             </div>
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Reset Password
                                         </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="reset_password.html">Quên mật khẩu?</a>
+                                        <a class="small" href="login.html">Đăng nhập</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="register.html">Chưa có tài khoản? Đăng ký!</a>
@@ -70,20 +70,13 @@
     </div>
 	
 	<script>
-		function randInt(min, max) {
-		  min = Math.ceil(min);
-		  max = Math.floor(max);
-		  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-		}
-		
 		let captchaText = document.querySelector('#captcha');
 		var ctx = captchaText.getContext("2d");
 		ctx.font = "30px Roboto";
 		ctx.fillStyle = "#08e5ff";
 	
-		let list = "${captcha}";
-		const text = list.split(" ");
+		let text = "${captcha}";
 	
-		ctx.fillText(text[randInt(0,2)], captchaText.width/4, captchaText.height/2);
+		ctx.fillText(text, captchaText.width/4, captchaText.height/2);
 	</script>
 <jsp:include page="footer.jsp"></jsp:include>

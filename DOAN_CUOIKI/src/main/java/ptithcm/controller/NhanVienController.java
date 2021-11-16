@@ -56,7 +56,6 @@ public class NhanVienController {
 	//Gọi trang insert
 	@RequestMapping(value="insert", method = RequestMethod.GET)
 	public String insertNV_GET(ModelMap model, HttpSession httpsession) {
-		model.addAttribute("nv", new NHANVIEN());//thêm nên ta cần truyền 1 nhân viên mới lên
 		model.addAttribute("chedo", "insert");//set chế độ là insert
 		return "NhanVien/nhanvien";
 	}
@@ -73,6 +72,7 @@ public class NhanVienController {
 			if (!mk1.equals(mk2)) throw new Exception("Không trùng mật khẩu!");
 			if (!XSScheck(manv)||!XSScheck(hoten)||!XSScheck(email)||!XSScheck(tendn)) 
 				throw new Exception("Không sử dụng các kí tự '<,>,/,\'");
+			if (manv.length()>20) throw new Exception("Giới hạn độ dài mã nhân viên là 20");
 			//Kiểm tra xem mã nhân viên có nằm trong db chưa, 
 			for (NHANVIEN nhanvien:list) 
 				if (nhanvien.getMANV().equals(manv)||nhanvien.getTENDN().equals(tendn)) 
@@ -200,4 +200,5 @@ public class NhanVienController {
 		}		
 		return "redirect:index.html";
 	}
+	
 }

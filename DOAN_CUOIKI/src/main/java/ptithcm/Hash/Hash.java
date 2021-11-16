@@ -8,6 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Hash {
+	public static final int MD5_LENGTH = 32;
+	public static final int SHA1_LENGTH = 40;
 	//In ra chuỗi hex từ mảng byte/ VD data = 0xFF thì sẽ in ra màn hình FF
     public static String convertByteToHex(byte[] data, int length){
         BigInteger number = new BigInteger(1, data);

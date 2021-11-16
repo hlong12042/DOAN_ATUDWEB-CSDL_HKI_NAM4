@@ -57,10 +57,11 @@ public class HocPhanController {
 	@RequestMapping(value="insert", method = RequestMethod.POST)
 	public String insert(RedirectAttributes re, @ModelAttribute("hocphans") List<HOCPHAN> hocphans, HttpSession httpsession,
 			@RequestParam("mahp") String mahp, @RequestParam("tenhp") String tenhp, @RequestParam("sotc") int sotc) {
-		try{
+		try{//Kiểm tra input
 			if(mahp.isBlank()||tenhp.isBlank()) throw new Exception("Gói tin của bạn có vấn đề!");
 			if(!XSScheck(mahp)||!XSScheck(tenhp)) throw new Exception("Không sử dụng các kí tự '<,>,/,\'");
 			if (sotc<=0||12<sotc) throw new Exception("Chỉ nhập số tín chỉ từ 1 đến 12 theo qui định!");
+			if (mahp.length()>20) throw new Exception("Giới hạn độ dài mã học phần là 20");
 			for (HOCPHAN hp:hocphans)
 				if (hp.getMAHP().equals(mahp)) throw new Exception("Học phần này đã tồn tại trong db (hoặc trùng mã học phần)!");
 			HOCPHAN hp = new HOCPHAN();
@@ -118,14 +119,15 @@ public class HocPhanController {
 	public String delete(RedirectAttributes re, @ModelAttribute("hocphans") List<HOCPHAN> hocphans,
 			@RequestParam("mahp") String mahp) {
 		try {
-			if (mahp.isBlank()) throw new Exception("Không tìm thấy học phần này!");
-			
-			HOCPHAN hp;
+			if (mahp.isBlank()) throw new Exception("Không tìm thấy học phần này!");			
 			int i=0;
 			for (i=0; i<hocphans.size(); i++) 
 				if (hocphans.get(i).getMAHP().equals(mahp)) break;			
 			if (i==hocphans.size()) throw new Exception("Không tìm thấy học phần này!");
-			hp = hocphans.get(i);
+			HOCPHAN hp = hocphans.get(i);
+			if (!hp.getBangdiems().isEmpty())
+				throw new Exception("Học phần này đã được giảng dạy không thể xóa!");
+			
 			Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {

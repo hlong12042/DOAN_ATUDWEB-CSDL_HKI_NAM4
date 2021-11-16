@@ -22,6 +22,9 @@
 
     <!-- Custom styles for this template-->
     <link href="sources/css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for CAPTCHA-->
+    <link href="sources/css/captcha.css" rel="stylesheet">
 
 </head>
 <body id="page-top">

@@ -1,7 +1,5 @@
 package ptithcm.entity;
 
-import java.io.File;
-import java.security.interfaces.RSAKey;
 import java.util.List;
 
 import javax.persistence.Entity;

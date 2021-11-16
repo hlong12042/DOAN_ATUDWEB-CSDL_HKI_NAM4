@@ -48,6 +48,7 @@ public class LOP {
 	public void setSinhvien(List<SINHVIEN> sinhviens) {
 		this.sinhviens = sinhviens;
 	}
-	
-	
+	public int getSyso() {
+		return sinhviens.isEmpty()?0:sinhviens.size();
+	}
 }

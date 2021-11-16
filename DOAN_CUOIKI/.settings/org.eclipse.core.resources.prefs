@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/main/java/ptithcm/RSA/GenerateKeys.java=UTF-8
 encoding//src/main/java/ptithcm/RSA/RSA.java=UTF-8
 encoding//src/main/java/ptithcm/controller/BangDiemController.java=UTF-8
 encoding//src/main/java/ptithcm/controller/HocPhanController.java=UTF-8
+encoding//src/main/java/ptithcm/controller/LopController.java=UTF-8
 encoding//src/main/java/ptithcm/controller/NhanVienController.java=UTF-8
 encoding//src/main/java/ptithcm/controller/SignController.java=UTF-8
+encoding//src/main/java/ptithcm/controller/SinhVienController.java=UTF-8

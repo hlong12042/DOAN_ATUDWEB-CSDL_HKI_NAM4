@@ -165,7 +165,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${account.TENDN}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="sources/images/undraw_profile.svg">
+                                    src="sources/img/undraw_profile.svg">
                             </a>
                             <!-- Drop down - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -201,7 +201,7 @@
 	                </c:if>
 	                
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">THÔNG TIN NHÂN VIÊN</h1>
+                    <h1 class="h3 mb-4 text-gray-800">THÔNG TIN SINH VIÊN</h1>
 					<!-- Content Row -->
                     <div class="row">
                     	<div class="col-xl-4 col-lg-5">
@@ -215,31 +215,41 @@
                     	<div class="col-xl-8 col-lg-6">
                     		<div class="card border-left-primary shadow h-100 py-2">
                     			<div class="card-body">
-                    				<form class="user" action="nhanvien/${chedo}.html" method="post">
+                    				<form class="user" action="SV/${chedo}.html" method="post">
                     					<div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="input_manv" aria-describedby="textHelp" name="manv"
-                                                placeholder="Mã nhân viên..." value="${nv.MANV}" required>
+                                                id="input_manv" aria-describedby="textHelp" name="masv"
+                                                placeholder="Mã nhân viên..." value="${sv.MASV}" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="input_hoten" aria-describedby="textHelp" name="hoten"
-                                                placeholder="Họ tên..." value="${nv.HOTEN}" required>
+                                                placeholder="Họ tên..." value="${sv.HOTEN}" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="input_email" aria-describedby="emailHelp" name="email"
-                                                placeholder="Email..." value="${nv.EMAIL}" required>
+                                            <input type="date" class="form-control form-control-user"
+                                                id="input_date" aria-describedby="emailHelp" name="ngaysinh"
+                                                placeholder="Ngày sinh..." value="${sv.NGAYSINH}" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="input_luong" aria-describedby="textHelp" name="luong" 
-                                                placeholder="Lương..." value="${nv.hadKey==true?nv.LUONGlong:''}" required>
+                                                id="input_luong" aria-describedby="textHelp" name="diachi" 
+                                                placeholder="Địa chỉ..." value="${sv.DIACHI}" required>
+                                        </div>
+                                        <div class="form-group">
+                                        	<select class="form-control" style="border-radius: 10rem;"
+                                        	id="sel_lop" name="malop" required="required">
+                                        		<option disabled="disabled" ${sv.lop.MALOP!=null?'':'selected'}>Lớp...</option>
+                                        		<c:forEach items="${account.lops}" var="lop">
+                                        			<option value="${lop.MALOP}" ${sv.lop.MALOP==lop.MALOP?'selected':''}>
+                                        			${lop.MALOP} - ${lop.TENLOP}</option>
+                                        		</c:forEach>
+                                        	</select>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="input_tendn" aria-describedby="textHelp" name="tendn" 
-                                                placeholder="Tên đăng nhập..." value="${nv.TENDN}" required>
+                                                placeholder="Tên đăng nhập..." value="${sv.TENDN}" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
@@ -252,7 +262,7 @@
                                                 placeholder="Nhập lại mật khẩu..." required>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            ${chedo=='insert'?'Thêm nhân viên':'Chỉnh sửa'}
+                                            ${chedo=='insert'?'Thêm sinh viên':'Chỉnh sửa'}
                                         </button>
                     				</form>
                     			</div>

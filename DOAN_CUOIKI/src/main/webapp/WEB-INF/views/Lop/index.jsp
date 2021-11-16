@@ -31,7 +31,7 @@
 			<hr class="sidebar-divider">
 			
             <li class="nav-item">
-                <a class="nav-link" href="lop/">
+                <a class="nav-link" href="lop/#">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Lớp học</span></a>
             </li>
@@ -149,8 +149,7 @@
                                             alt="...">
                                     </div>
                                     <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
+                                        <div class="text-truncate">${thongbao.noidung}</div>
                                     </div>
                                 </a>
                                 </c:if>
@@ -165,7 +164,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${account.TENDN}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="sources/images/undraw_profile.svg">
+                                    src="sources/img/undraw_profile.svg">
                             </a>
                             <!-- Drop down - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -190,75 +189,72 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 					<c:if test="${loi!=null}">
-	                   	<div class="alert alert-danger" role="alert">
+                      	<div class="alert alert-danger" role="alert">
 						  ${loi}
 						</div>
-	                </c:if>
-	                <c:if test="${thanhcong!=null}">
-	                   	<div class="alert primary-danger" role="alert">
+                    </c:if>
+                    <c:if test="${thanhcong!=null}">
+                      	<div class="alert primary-danger" role="alert">
 						  ${thanhcong}
 						</div>
-	                </c:if>
-	                
+                    </c:if>
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">THÔNG TIN NHÂN VIÊN</h1>
+                    <h1 class="h3 mb-4 text-gray-800">THÔNG TIN LỚP HỌC</h1>
 					<!-- Content Row -->
-                    <div class="row">
-                    	<div class="col-xl-4 col-lg-5">
-                    		<div class="card border-left-primary shadow h-100 py-2">
-                    			<div class="card-body">                    				
-                    				<img src="sources/img/undraw_profile.svg">
-                    			</div>
-                    		</div>
-                    	</div>
-                    	
-                    	<div class="col-xl-8 col-lg-6">
-                    		<div class="card border-left-primary shadow h-100 py-2">
-                    			<div class="card-body">
-                    				<form class="user" action="nhanvien/${chedo}.html" method="post">
-                    					<div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="input_manv" aria-describedby="textHelp" name="manv"
-                                                placeholder="Mã nhân viên..." value="${nv.MANV}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="input_hoten" aria-describedby="textHelp" name="hoten"
-                                                placeholder="Họ tên..." value="${nv.HOTEN}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="input_email" aria-describedby="emailHelp" name="email"
-                                                placeholder="Email..." value="${nv.EMAIL}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="input_luong" aria-describedby="textHelp" name="luong" 
-                                                placeholder="Lương..." value="${nv.hadKey==true?nv.LUONGlong:''}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="input_tendn" aria-describedby="textHelp" name="tendn" 
-                                                placeholder="Tên đăng nhập..." value="${nv.TENDN}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="input_password1" aria-describedby="passwordHelp" name="matkhau1" 
-                                                placeholder="Mật khẩu mới..." required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="input_password2" aria-describedby="passwordHelp" name="matkhau2" 
-                                                placeholder="Nhập lại mật khẩu..." required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            ${chedo=='insert'?'Thêm nhân viên':'Chỉnh sửa'}
-                                        </button>
-                    				</form>
-                    			</div>
-                    		</div>
-                    	</div>
-                    </div>
+                    <!-- DataTales Example -->
+                    
+                    <div class="card shadow mb-4">
+                        
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Bảng thông tin lớp học</h6>
+                        </div>                        
+                        <div class="card-body">
+                        	<div class="table-responsive">
+                        		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        			<thead>
+                                        <tr>
+                                            <th>Mã lớp</th>
+                                            <th>Tên lớp</th>
+                                            <th>Sỷ số</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${account.lops}" var="lop">
+	                                	<tr>
+	                                    	<td>${lop.MALOP}</td>
+	                                        <td>${lop.TENLOP}</td>
+	                                        <td>${lop.syso}</td>
+	                                        <td>
+								            <a class="btn btn-primary" onclick="updateModal('${lop.MALOP}','${lop.TENLOP}')"
+								            data-toggle="modal" data-target="#updateModal">
+								                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+</svg>
+								                <span>Chỉnh sửa tên lớp</span></a>
+								            <a class="btn btn-danger" onclick="deleteModal('${lop.MALOP}')"
+								            data-toggle="modal" data-target="#deleteModal">
+								            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2" viewBox="0 0 16 16">
+  <path d="M14 3a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2zM3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5c-1.954 0-3.69-.311-4.785-.793z"/>
+</svg>							<!-- Ý tưởng là tạo n cái modal có tên là deleteModal_manv, khi bấm nó sẽ tìm data-target để mở -->
+								            	<span>Xóa lớp</span></a>
+	                                        </td>
+	                                        </tr>
+	                                        
+                                    </c:forEach>
+                                   	</tbody>
+                        		</table>
+                        		<a class="btn btn-primary" onclick="insertModal()"
+                        		data-toggle="modal" data-target="#updateModal">
+								                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+</svg>
+								                <span>Tạo lớp mới</span></a>
+                        	</div>
+                        </div>                       
+                    </div>                   
                 </div>
                 <!-- /.container-fluid -->
 
@@ -297,7 +293,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Chọn "Logout" nếu bạn muốn đăng xuất.</div>
+                <div class="modal-body">Chọn Logout Nếu bạn muốn đăng xuất</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="logout.html">Logout</a>
@@ -305,5 +301,68 @@
             </div>
         </div>
     </div>
-
+    <!-- Delete Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa lớp</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="lop/delete.html" method="post">
+                <div class="modal-body">Bạn thực sự muốn xóa lớp này?</div>
+                <input name="malop" id="del_malop" hidden="hidden" required="required">
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="delete" type="submit">Xóa</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Update Modal-->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="lop/delete.html" method="post" id="up_form">
+                <div class="modal-body">Bạn thực sự muốn xóa lớp này?
+                <div class="form-group">
+                	<input class="form-control" name="malop" id="up_malop" required="required" placeholder="Mã lớp...">
+                	<br>
+                	<input class="form-control" name="tenlop" id="up_tenlop" required="required" placeholder="Tên lớp...">
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="delete" type="submit">Xác nhận</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+    function deleteModal(malop){
+    	document.getElementById('del_malop').value=malop;
+    }
+    function updateModal(malop, tenlop){
+    	document.getElementById('up_malop').value=malop;
+    	document.getElementById('up_tenlop').value=tenlop;
+    	document.getElementById('up_form').setAttribute("action", "lop/update.html");
+    	document.getElementById('up_malop').setAttribute("readonly", "readonly");
+    }
+    function insertModal(){
+    	document.getElementById('up_malop').value="";
+    	document.getElementById('up_tenlop').value="";
+    	document.getElementById('up_form').setAttribute("action", "lop/insert.html");
+    	document.getElementById('up_malop').removeAttribute("readonly");
+    }
+    </script>
 <jsp:include page="../footer.jsp"></jsp:include>

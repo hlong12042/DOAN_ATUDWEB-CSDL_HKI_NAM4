@@ -31,7 +31,7 @@
 			<hr class="sidebar-divider">
 			
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="lop/">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Lớp học</span></a>
             </li>
@@ -380,9 +380,8 @@
                     </button>
                 </div>
                 <form action="hocphan/register.html" method="post" id="register_form">
-                <div class="modal-body">Nhập lớp bạn muốn đăng kí học phần?</div>
-                <div class="modal-footer">
-                	<div class="form-group">
+                <div class="modal-body">Nhập lớp bạn muốn đăng kí học phần?
+                <div class="form-group">
                 	<input hidden="hidden" name="mahp" id="res_mahp" placeholder="Mã học phần..." required="required">                	
                 	<select class="form-control" name="malop" required="required">
                 		<option disabled="disabled" selected="selected" value="">Chọn lớp...</option>
@@ -390,7 +389,9 @@
                 			<option value="${lop.MALOP}">${lop.MALOP} - ${lop.TENLOP} </option>
                 		</c:forEach>
                 	</select>
-                	</div>                	
+                	</div>
+                </div>
+                <div class="modal-footer">                	                	
                     <button class="btn btn-primary" id="delete" type="submit">Đăng kí</button>
                 </div>
                 </form>

@@ -31,7 +31,7 @@
 			<hr class="sidebar-divider">
 			
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="lop/">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Lớp học</span></a>
             </li>
@@ -188,7 +188,16 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+					<c:if test="${loi!=null}">
+                      	<div class="alert alert-danger" role="alert">
+						  ${loi}
+						</div>
+                    </c:if>
+                    <c:if test="${thanhcong!=null}">
+                      	<div class="alert primary-danger" role="alert">
+						  ${thanhcong}
+						</div>
+                    </c:if>
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">THÔNG TIN ĐĂNG NHẬP</h1>
 					<!-- Content Row -->
@@ -238,7 +247,7 @@
                     					<div class="row no-gutters align-items-center">
                     						<div class="col mr-2">
                     							<a class="text-xs font-weight-bold text-primary text-uppercase mb-1"
-                    							href="#">
+                    							href="SV/index.html?malop=${lop.MALOP}">
                     							${lop.MALOP}</a>
                     							<div class="h5 mb-0 font-weight-bold text-gray-800">
                     							${lop.TENLOP}</div>

@@ -34,7 +34,7 @@
 			<hr class="sidebar-divider">
 			
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="lop/">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Lớp học</span></a>
             </li>
@@ -205,15 +205,15 @@
                     <h1 class="h3 mb-4 text-gray-800">THÔNG TIN ĐIỂM</h1>
 					<!-- Content Row -->
                     <!-- DataTales Example -->
-                    <div class="col-xl-8 col-lg-7">
-                    <form class="input-group mb-4" action="bangdiem/loc.html" method="get">
+                    <div class="col-xl-9 col-lg-7">
+                    <div class="card shadow mb-4">
+                    <form class="input-group" action="bangdiem/loc.html" method="get">
                        	<select class="form-control" name="malop" required="required">
                        		<option value="" disabled="disabled" ${malop!=null?'':'selected'}>Lớp...</option>
                        		<c:forEach items="${account.lops}" var="lop">
                        			<option value="${lop.MALOP}" ${malop==lop.MALOP?'selected':''}>${lop.MALOP} - ${lop.TENLOP}</option>
                        		</c:forEach>
                        	</select>
-                       	<b></b>
                        	<select class="form-control" name="mahp" required="required">
                        		<option value="" disabled="disabled" ${mahp!=null?'':'selected'}>Học phần...</option>
                        		<c:forEach items="${hocphans}" var="hp">
@@ -222,6 +222,7 @@
                        	</select>
                        	<button class="btn btn-primary" type="submit">Lọc</button>
                     </form>
+                    </div>
                     </div>
                     <br>
                     <div class="card shadow mb-4">
@@ -346,9 +347,11 @@
                 <form method="post" action="bangdiem/insert_SV.html" method="post" class="input-group mb-4">
 	                <div class="modal-body">	                	
 	                	<select class="form-control" id="malop_sel" name="malop" >
-	                		<option selected="selected" disabled="disabled">Mã lớp...</option>
+	                		<option disabled="disabled" ${malop!=null?'':'selected'}>
+	                			Lớp...</option>
 	                		<c:forEach items="${account.lops}" var="lop">
-	                			<option value="${lop.MALOP}">${lop.MALOP}</option>
+	                			<option value="${lop.MALOP}" ${malop==lop.MALOP?'selected':''}> 
+	                			${lop.MALOP} - ${lop.TENLOP}</option>
 	                		</c:forEach>
 	                	</select>
 	                	<br>
@@ -356,9 +359,11 @@
 	                	</select>
 	                	<br>
 	                	<select class="form-control" name="mahp">
-	                		<option value="" selected="selected" disabled="disabled">Học phần...</option>
+	                		<option disabled="disabled" ${mahp!=null?'':'selected'}>
+	                			Học phần...</option>
 	                		<c:forEach items="${hocphans}" var="hp">
-	                			<option value="${hp.MAHP}">${hp.TENHP}</option>
+	                			<option value="${hp.MAHP}" ${mahp==hp.MAHP?'selected':''}>
+	                				${hp.MAHP} - ${hp.TENHP}</option>
 	                		</c:forEach>
 	                	</select>                	
 	                </div>
@@ -409,21 +414,40 @@
 	var pre_pos = 0;
 	
 	init();
-	
+	preload();
 	function init(){
 		let lop = {};
-		let masv = "";
+		let sv = {};
 		<c:forEach items="${account.lops}" var="lop">
 			lop = {
 					malop:"${lop.MALOP}",
 					sinhviens:[],
 			}
 			<c:forEach items="${lop.sinhviens}" var="sv">
-				masv = "${sv.MASV}";
-				lop.sinhviens.push(masv);
+				sv = {
+						masv:"${sv.MASV}",
+						tensv:"${sv.HOTEN}"
+				}
+				lop.sinhviens.push(sv);
 			</c:forEach>
 			list_lops.push(lop);
 		</c:forEach>
+	}
+	
+	function preload(){
+		var malop = "${malop}";
+		  selected_lop = list_lops.find((p)=>{
+			  return p.malop == malop;
+		  })
+		  if (selected_lop==null) return;
+		  document.getElementById("masv_sel").innerHTML="";
+		  let sinhviens = selected_lop.sinhviens;
+		  for (let i=0; i<sinhviens.length; i++){
+			  var opt = document.createElement('option');
+			  opt.value = sinhviens[i].masv;
+			  opt.innerHTML = sinhviens[i].masv + " - " + sinhviens[i].tensv;
+			  document.getElementById("masv_sel").appendChild(opt);
+		  }
 	}
 	
 	document.getElementById("malop_sel").addEventListener("change", function() {
@@ -436,10 +460,12 @@
 		  let sinhviens = selected_lop.sinhviens;
 		  for (let i=0; i<sinhviens.length; i++){
 			  var opt = document.createElement('option');
-			  opt.value = sinhviens[i];
-			  opt.innerHTML = sinhviens[i];
+			  opt.value = sinhviens[i].masv;
+			  opt.innerHTML = sinhviens[i].masv + " - " + sinhviens[i].tensv;
 			  document.getElementById("masv_sel").appendChild(opt);
 		  }
 	});
+	
+	
 </script>
 <jsp:include page="../footer.jsp"></jsp:include>
