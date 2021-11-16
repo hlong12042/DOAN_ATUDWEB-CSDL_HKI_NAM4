@@ -17,4 +17,4 @@ Tham khảo thêm tại [https://openplanning.net/11583/cai-dat-tomcat-server]
 ###Lưu ý
 Trước khi chạy Server cần tìm nơi để chứa thư mục rsa_keypair
 Vì mỗi máy sẽ có nơi chưa thư mục này khác nhau
-Build riêng RSA.java và chạy để tìm đường dẫn đúng và đặt thư mục rsa_keypair vào
+Build riêng GenerateKeys.java và chạy để tìm đường dẫn đúng và đặt thư mục rsa_keypair vào
