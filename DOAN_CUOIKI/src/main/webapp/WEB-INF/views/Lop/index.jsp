@@ -215,7 +215,7 @@
                                         <tr>
                                             <th>Mã lớp</th>
                                             <th>Tên lớp</th>
-                                            <th>Sỷ số</th>
+                                            <th>Sỉ số</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -265,7 +265,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Nhóm 3 môn An toàn ứng dụng Web & CSDL 2021</span>
                     </div>
                 </div>
             </footer>

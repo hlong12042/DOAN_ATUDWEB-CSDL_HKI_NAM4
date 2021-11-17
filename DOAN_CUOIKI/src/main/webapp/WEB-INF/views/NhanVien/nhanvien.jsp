@@ -165,7 +165,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${account.TENDN}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="sources/images/undraw_profile.svg">
+                                    src="sources/img/undraw_profile.svg">
                             </a>
                             <!-- Drop down - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -269,7 +269,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Nhóm 3 môn An toàn ứng dụng Web & CSDL 2021</span>
                     </div>
                 </div>
             </footer>

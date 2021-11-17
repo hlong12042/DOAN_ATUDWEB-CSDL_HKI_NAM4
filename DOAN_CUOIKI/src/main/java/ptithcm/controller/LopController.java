@@ -1,5 +1,6 @@
 package ptithcm.controller;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
@@ -32,6 +33,7 @@ public class LopController {
 		String[] list = {"(?i)<script.*?>.*?</script.*?>", "(?i)<.*?javascript:.*?>.*?</.*?>", "(?i)<.*?\\s+on.*?>.*?</.*?>"};
 		for (String s:list) 
 			if (Pattern.matches(s, str)) return false;
+		if (str.contains("'")) return false;
 		return true;
 	}
 	
@@ -59,7 +61,9 @@ public class LopController {
 			try {
 				session.save(lop);
 				t.commit();
+				lop.setSinhvien(new ArrayList<>());
 				account.getLops().add(lop);
+				session.clear();
 				re.addFlashAttribute("thanhcong", "Thêm lớp thành công!");
 			} catch (Exception ex) {
 				t.rollback();
@@ -91,10 +95,11 @@ public class LopController {
 				session.update(lop);
 				t.commit();
 				account.getLops().set(i, lop);
+				session.clear();
 				re.addFlashAttribute("thanhcong", "Tên lớp đã được chỉnh sửa!");
 			} catch (Exception ex) {
 				t.rollback();
-				re.addFlashAttribute("loi", "Không thể chỉnh sửa lớp này!");
+				re.addFlashAttribute("loi", ex);
 			}
 		} catch (Exception ex){
 			re.addFlashAttribute("loi", ex);
@@ -122,10 +127,11 @@ public class LopController {
 				session.delete(lop);
 				t.commit();
 				account.getLops().remove(i);
+				session.clear();
 				re.addFlashAttribute("thanhcong", "Lớp đã được xóa!");
 			} catch (Exception ex) {
 				t.rollback();
-				re.addFlashAttribute("loi", "Không thể xóa lớp này!");
+				re.addFlashAttribute("loi", ex);
 			}
 		} catch (Exception ex) {
 			re.addFlashAttribute("loi", ex);

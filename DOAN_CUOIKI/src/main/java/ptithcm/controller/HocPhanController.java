@@ -39,6 +39,7 @@ public class HocPhanController {
 		String[] list = {"(?i)<script.*?>.*?</script.*?>", "(?i)<.*?javascript:.*?>.*?</.*?>", "(?i)<.*?\\s+on.*?>.*?</.*?>"};
 		for (String s:list) 
 			if (Pattern.matches(s, str)) return false;
+		if (str.contains("'")) return false;
 		return true;
 	}
 	

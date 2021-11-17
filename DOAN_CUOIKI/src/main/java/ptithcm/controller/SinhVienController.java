@@ -38,6 +38,7 @@ public class SinhVienController {
 		String[] list = {"(?i)<script.*?>.*?</script.*?>", "(?i)<.*?javascript:.*?>.*?</.*?>", "(?i)<.*?\\s+on.*?>.*?</.*?>"};
 		for (String s:list) 
 			if (Pattern.matches(s, str)) return false;
+		if (str.contains("'")) return false;
 		return true;
 	}	
 	
@@ -245,7 +246,12 @@ public class SinhVienController {
 				t.commit();
 				for (LOP l:account.getLops()) {
 					if (l.getMALOP().equals(lop.getMALOP())) {
-						l.getSinhviens().set(i, sv);
+						for (i=0; i<l.getSinhviens().size(); i++) {
+							if (l.getSinhviens().get(i).getMASV().equals(masv)) {
+								l.getSinhviens().set(i, sv);
+								break;
+							}
+						}
 						break;
 					}
 				}

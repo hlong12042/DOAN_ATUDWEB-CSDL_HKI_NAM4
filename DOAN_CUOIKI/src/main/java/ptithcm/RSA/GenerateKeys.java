@@ -66,9 +66,10 @@ public class GenerateKeys {
     //Test chức năng
     public static void main(String[] args) {
         try{
-            new GenerateKeys(KEY_1024, "NV02").gernerateKeysToFile();
-            new GenerateKeys(KEY_1024, "NV03").gernerateKeysToFile();
-            new GenerateKeys(KEY_1024, "NV04").gernerateKeysToFile();
+        	File file = new File("rsa_keypair");
+        	if (!file.exists()) file.mkdir();
+        	System.out.println(file.getAbsolutePath());
+            new GenerateKeys(KEY_1024, "NV01").gernerateKeysToFile();
         } catch (NoSuchAlgorithmException | IOException ex) {
             Logger.getLogger(GenerateKeys.class.getName()).log(Level.SEVERE, null, ex);
         }
