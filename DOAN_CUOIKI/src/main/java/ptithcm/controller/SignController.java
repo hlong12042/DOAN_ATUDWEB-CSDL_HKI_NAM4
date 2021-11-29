@@ -34,12 +34,13 @@ public class SignController {
 	ServletContext context;
 	@Autowired
 	JavaMailSender mailer;
-	
+	//Khởi tạo list captcha 99 phần tử là các chuỗi 7 kí tự gồm in hoa, thường, số
 	public static String[] captcha_list = Random.RandomStringArray(99, 7, Random.alphabet);
-	
+	//Mỗi khi truy cập vào trang login hay trang reset password
+	//chọn 1 mã captcha ngẫu nhiên từ 99 mã trên sẽ được gửi lên view
 	@ModelAttribute("captcha")
 	public String catcha_text() {
-		return captcha_list[Random.randomInt(0, 61)]+" "+captcha_list[Random.randomInt(0, 61)]+" "+captcha_list[Random.randomInt(0, 61)];
+		return captcha_list[Random.randomInt(0, 98)];
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
@@ -51,13 +52,18 @@ public class SignController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login_post(HttpSession httpsession, RedirectAttributes re, @RequestParam("captcha") String captcha,
 			@RequestParam("tendn") String tendn, @RequestParam("matkhau") String matkhau) {
-		int i=0;
-		for (i=0; i<captcha_list.length;i++) 
+		if (captcha.isBlank()||tendn.isBlank()||matkhau.isBlank()) {
+			re.addFlashAttribute("tb", "Không để trống");
+			return "redirect:login.html";
+		}
+		int i;
+		for (i=0; i<captcha_list.length; i++)
 			if (captcha_list[i].equals(captcha)) break;
 		if (i==captcha_list.length) {
 			re.addFlashAttribute("tb", "Sai captcha!");
 			return "redirect:login.html";
 		}
+		captcha_list[i] = Random.RandomString(7, Random.alphabet);
 		String hql = "FROM NHANVIEN WHERE TENDN = :tendn AND MATKHAU = :matkhau";
 		Session session = factory.getCurrentSession();
 		List<Object> list = session.createQuery(hql).setString("tendn", tendn).setParameter("matkhau", 
@@ -67,7 +73,7 @@ public class SignController {
 			return "redirect:login.html";
 		}
 		httpsession.setAttribute("account", (NHANVIEN) list.get(0));
-		httpsession.setMaxInactiveInterval(5*60*60);
+		httpsession.setMaxInactiveInterval(60*60);//1h = 60*60s
 		return "redirect:index.html";
 	}
 	
@@ -84,11 +90,19 @@ public class SignController {
 	
 	@SuppressWarnings("unchecked" )
 	@RequestMapping(value = "reset_password", method = RequestMethod.POST)
-	public String reset_post(HttpSession httpsession, RedirectAttributes re,
+	public String reset_post(HttpSession httpsession, RedirectAttributes re, @RequestParam("captcha") String captcha,
 			@RequestParam("tendn") String tendn, @RequestParam("email") String email) {
 		try {
-			if (tendn.isBlank()||email.isBlank()) throw new Exception("Không được để trống!");
-			if (!email.contains("@")) throw new Exception("Nhập đúng định dạng email!");
+			if (captcha.isBlank()||tendn.isBlank()||email.isBlank()) throw new Exception("Không được để trống!");
+			if (!email.contains("@")) throw new Exception("Nhập đúng định dạng email!");			
+			int i;
+			for (i=0; i<captcha_list.length; i++)
+				if (captcha_list[i].equals(captcha)) break;
+			if (i==captcha_list.length) {
+				re.addFlashAttribute("tb", "Sai captcha!");
+				return "redirect:login.html";
+			}
+			captcha_list[i] = Random.RandomString(7, Random.alphabet);
 			Session session = factory.getCurrentSession();
 			List<NHANVIEN> list = (List<NHANVIEN>) session.createQuery("FROM NHANVIEN WHERE TENDN=:tendn").setString("tendn", tendn).list();
 			if (list.isEmpty()) throw new Exception("Không tìm thấy tài khoản này!");

@@ -70,20 +70,11 @@
     </div>
 	
 	<script>
-		function randInt(min, max) {
-		  min = Math.ceil(min);
-		  max = Math.floor(max);
-		  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-		}
-		
+		//Tìm và chỉnh sửa lại thẻ <canvas>
 		let captchaText = document.querySelector('#captcha');
 		var ctx = captchaText.getContext("2d");
 		ctx.font = "30px Roboto";
 		ctx.fillStyle = "#08e5ff";
-	
-		let list = "${captcha}";
-		const text = list.split(" ");
-	
-		ctx.fillText(text[randInt(0,2)], captchaText.width/4, captchaText.height/2);
+		ctx.fillText("${captcha}", captchaText.width/4, captchaText.height/2);
 	</script>
 <jsp:include page="footer.jsp"></jsp:include>

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class Hash {
 	public static final int MD5_LENGTH = 32;
 	public static final int SHA1_LENGTH = 40;
-	//In ra chuỗi hex từ mảng byte/ VD data = 0xFF thì sẽ in ra màn hình FF
+	//In ra mã hex từ byte[]
     public static String convertByteToHex(byte[] data, int length){
         BigInteger number = new BigInteger(1, data);
         String hashtext = number.toString(16);
@@ -43,7 +43,7 @@ public class Hash {
             return null;
         }
     }
-    //Tương tự trên nhưng đầu vào là mảng byte
+
     public static byte[] convertMD5(byte[] text) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -67,7 +67,7 @@ public class Hash {
             return null;
         }
     }
-    //Test các hàm băm
+    //Test các phương thức
     public static void main(String[] args) {
         System.out.println(convertByteToHex(convertSHA1(new String("123456").getBytes()), 40));
     }
